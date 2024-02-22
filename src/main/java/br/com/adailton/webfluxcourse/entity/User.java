@@ -15,7 +15,7 @@ public class User {
     private String userId;
     private String name;
 
-    @Indexed(unique = true)
+    @Indexed(unique = true) //por padrão o unique é false;
     private String email;
     private String password;
 }
