@@ -1,8 +1,8 @@
 package br.com.adailton.webfluxcourse.controller.exceptions;
 
-import com.mongodb.DuplicateKeyException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import reactor.core.publisher.Mono;
@@ -24,8 +24,8 @@ public class ControllerExceptionHandler {
                                 .timestamp(now())
                                 .status(BAD_REQUEST.value())
                                 .error(BAD_REQUEST.getReasonPhrase())
-                                .path(request.getURI().getPath())
                                 .message(verifyDupKey(ex.getMessage()))
+                                .path(request.getPath().toString())
                                 .build()
                 ));
     }
@@ -34,7 +34,7 @@ public class ControllerExceptionHandler {
         if (message.contains("email dup key")) {
             return "Email ja existe";
         }
-        return "Duplicated Key Exception";
+        return "Dup Key Exception";
     }
 }
 
