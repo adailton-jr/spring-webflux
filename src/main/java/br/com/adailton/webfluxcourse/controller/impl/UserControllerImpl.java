@@ -1,6 +1,7 @@
 package br.com.adailton.webfluxcourse.controller.impl;
 
 import br.com.adailton.webfluxcourse.controller.UserController;
+import br.com.adailton.webfluxcourse.mapper.UserMapper;
 import br.com.adailton.webfluxcourse.model.request.UserRequest;
 import br.com.adailton.webfluxcourse.model.response.UserResponse;
 import br.com.adailton.webfluxcourse.service.UserService;
@@ -18,6 +19,7 @@ import reactor.core.publisher.Mono;
 public class UserControllerImpl implements UserController {
 
     private final UserService service;
+    private final UserMapper mapper;
 
     @Override
     public ResponseEntity<Mono<Void>> save(UserRequest request) {
@@ -26,7 +28,7 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<Mono<UserResponse>> findOne(String id) {
+    public ResponseEntity<Mono<UserResponse>> findById(String id) {
         return null;
     }
 
