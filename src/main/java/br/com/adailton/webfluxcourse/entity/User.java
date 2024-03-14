@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder
-@Document
+@Document//sustitui o @Entity
 public class User {
 
     @Id
