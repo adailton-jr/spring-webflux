@@ -12,10 +12,11 @@ public record UserRequest(
         String name,
         @TrimString
         @Email(message = "invalid email")
+        @NotBlank(message = "Email cannot be blank or null")
         String email,
         @TrimString
-        @Size(min = 4, max = 16, message = "Name must be between 4 and 16 characters")
-        @NotBlank(message = "Name cannot be blank or null")
+        @Size(min = 4, max = 16, message = "Password must be between 4 and 16 characters")
+        @NotBlank(message = "Password cannot be blank or null")
         String password
 ) {
 }

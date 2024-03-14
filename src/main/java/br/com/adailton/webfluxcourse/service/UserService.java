@@ -6,6 +6,7 @@ import br.com.adailton.webfluxcourse.model.request.UserRequest;
 import br.com.adailton.webfluxcourse.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -21,5 +22,9 @@ public class UserService {
 
     public Mono<User> findById(final String id) {
         return repository.findById(id);
+    }
+
+    public Flux<User> findAll() {
+        return repository.findAll();
     }
 }
