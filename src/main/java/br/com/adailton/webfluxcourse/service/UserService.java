@@ -21,8 +21,7 @@ public class UserService {
     }
 
     public Mono<User> findById(final String id) {
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(new RuntimeException("User not found")));
+        return repository.findById(id);
     }
 
     public Flux<User> findAll() {

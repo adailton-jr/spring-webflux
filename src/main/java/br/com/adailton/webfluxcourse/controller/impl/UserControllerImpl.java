@@ -32,6 +32,7 @@ public class UserControllerImpl implements UserController {
         return ResponseEntity.ok().body(
                 service.findById(id).map(mapper::toResponse)
         );
+
     }
 
     @Override
