@@ -1,5 +1,6 @@
 package br.com.adailton.webfluxcourse.service;
 
+import br.com.adailton.webfluxcourse.controller.exception.ObjectNotFoundException;
 import br.com.adailton.webfluxcourse.entity.User;
 import br.com.adailton.webfluxcourse.mapper.UserMapper;
 import br.com.adailton.webfluxcourse.model.request.UserRequest;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import static java.lang.String.format;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +24,13 @@ public class UserService {
     }
 
     public Mono<User> findById(final String id) {
-        return repository.findById(id);
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(
+                        new ObjectNotFoundException(
+                                format("Object not found. Id: %s, Type: %s", id, User.class.getSimpleName())
+                        )
+                ));
+
     }
 
     public Flux<User> findAll() {
@@ -32,5 +41,14 @@ public class UserService {
         return findById(id)
                 .map(user -> mapper.toEntity(request, user))
                 .flatMap(repository::save);
+    }
+
+    public Mono<User> delete(String id) {
+        return repository.findAndRemove(id)
+                .switchIfEmpty(Mono.error(
+                        new ObjectNotFoundException(
+                                format("Object not found. Id: %s, Type: %s", id, User.class.getSimpleName())
+                        )
+                ));
     }
 }

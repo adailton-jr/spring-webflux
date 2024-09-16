@@ -1,4 +1,4 @@
-package br.com.adailton.webfluxcourse.controller.exceptions;
+package br.com.adailton.webfluxcourse.controller.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
