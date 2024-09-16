@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+id_rsa_novo
+id_rsa_novo.pub
